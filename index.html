@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil | Muhammad Arifin Nursalim</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0F172A',       // Biru dongker
+            primarySoft: '#1E293B',
+            accent: '#F59E0B',        // Kuning emas
+            accentSoft: '#FCD34D',
+            secondary: '#7F1D1D',     // Merah dongker
+            secondarySoft: '#991B1B',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-slate-50 text-primary dark:bg-slate-950 dark:text-slate-100">
+
+<!-- ================= NAVBAR ================= -->
+<nav class="fixed w-full top-0 bg-primary text-white shadow z-50">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+
+    <h1 class="text-xl font-bold tracking-wide">Arifin</h1>
+
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex items-center space-x-6">
+      <a href="#home" class="hover:text-accent transition">Home</a>
+      <a href="#about" class="hover:text-accent transition">Tentang Saya</a>
+      <a href="#experience" class="hover:text-accent transition">Pengalaman</a>
+      <a href="#certification" class="hover:text-accent transition">Sertifikasi</a>
+      <a href="#gallery" class="hover:text-accent transition">Galeri</a>
+      <a href="#contact" class="hover:text-accent transition">Kontak</a>
+
+      <button id="toggleDark"
+        class="px-3 py-1 rounded bg-primarySoft hover:bg-accent hover:text-primary transition">
+        🌙
+      </button>
+    </div>
+
+    <!-- Mobile Button -->
+    <button id="menuBtn" class="md:hidden text-2xl">☰</button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu"
+    class="hidden md:hidden bg-primarySoft text-white px-6 pb-4 space-y-3">
+    <a href="#home" class="block hover:text-accent">Home</a>
+    <a href="#about" class="block hover:text-accent">Tentang Saya</a>
+    <a href="#experience" class="block hover:text-accent">Pengalaman</a>
+    <a href="#certification" class="block hover:text-accent">Sertifikasi</a>
+    <a href="#gallery" class="block hover:text-accent">Galeri</a>
+    <a href="#contact" class="block hover:text-accent">Kontak</a>
+
+    <button id="toggleDarkMobile"
+      class="w-full py-2 rounded bg-accent text-primary font-semibold">
+      🌙 Mode Gelap
+    </button>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section id="home"
+  class="pt-36 pb-24 bg-gradient-to-b from-primary to-primarySoft text-white">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
+
+    <img src="img/f-arifin.jpg"
+      alt="Foto Muhammad Arifin Nursalim"
+      class="w-52 h-52 md:w-56 md:h-56 rounded-full object-cover
+             border-4 border-accent shadow-xl">
+
+    <div class="text-center md:text-left">
+      <h2 class="text-4xl font-bold mb-4">
+        Muhammad Arifin Nursalim, S.Kom
+      </h2>
+      <p class="text-xl text-accentSoft mb-6">
+        Trainer IT • Data Analyst • Praktisi IT
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+        <a href="#contact"
+          class="px-6 py-3 bg-accent text-primary rounded-lg font-semibold hover:bg-accentSoft transition">
+          Hubungi Saya
+        </a>
+        <a href="#about"
+          class="px-6 py-3 border border-accent text-accent rounded-lg hover:bg-accent hover:text-primary transition">
+          Tentang Saya
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= TENTANG ================= -->
+<section id="about" class="py-20 bg-white dark:bg-primarySoft">
+  <div class="max-w-5xl mx-auto px-6">
+    <h3 class="text-3xl font-bold mb-6 text-primary dark:text-accent">
+      Tentang Saya
+    </h3>
+    <p class="leading-relaxed">
+     Saya adalah seorang pengajar profesional dengan pengalaman lebih
+dari 7 tahun di bidang Data Analysis, Teknologi Informasi, dan
+Digital Marketing. Berlatar belakang sebagai IT di beberapa perusahaan,
+saya telah membantu berbagai bisnis dan institusi dalam
+mengoptimalkan pengambilan keputusan berbasis data,
+mengembangkan sistem berbasis teknologi, serta menyusun strategi
+pemasaran digital yang efektif dan terukur.
+
+Keahlian saya meliputi pengolahan dan visualisasi data, pemrograman, serta kampanye digital marketing. Saya berkomitmen untuk terus belajar dan
+berbagi pengetahuan guna menciptakan dampak positif melalui teknologi.
+    </p>
+  </div>
+</section>
+
+<!-- ================= PENGALAMAN ================= -->
+<section id="experience" class="py-20">
+  <div class="max-w-5xl mx-auto px-6">
+    <h3 class="text-3xl font-bold mb-6 text-primary dark:text-accent">
+      Pengalaman Mengajar
+    </h3>
+    <div class="space-y-4">
+      <div class="p-4 bg-white dark:bg-primarySoft rounded shadow border-l-4 border-secondary">
+        <strong>Koding dan Kecerdasan Artifisial</strong> – Pelatihan Guru-guru untuk berbagai jenjang pendidikan.
+      </div>
+      <div class="p-4 bg-white dark:bg-primarySoft rounded shadow border-l-4 border-secondary">
+        <strong>Microsoft Excel</strong> – untuk pengolahan data, visualisasi, dan automasi.
+      </div>
+      <div class="p-4 bg-white dark:bg-primarySoft rounded shadow border-l-4 border-secondary">
+        <strong>Python</strong> – untuk analisis data, automasi, dan pemrograman tingkat lanjut.
+      </div>
+      <div class="p-4 bg-white dark:bg-primarySoft rounded shadow border-l-4 border-secondary">
+        <strong>Bahasa Pemrograman C++</strong> – sebagai dasar logika algoritma dan pemrograman terstruktur.
+      </div>
+      <div class="p-4 bg-white dark:bg-primarySoft rounded shadow border-l-4 border-secondary">
+        <strong>Front-End Development</strong> – menggunakan HTML, CSS,
+        JavaScript, Bootstrap, Tailwind CSS, Angular js dan Vue js untuk membangun antarmuka web yang responsif dan interaktif.
+      </div>
+      <div class="p-4 bg-white dark:bg-primarySoft rounded shadow border-l-4 border-secondary">
+        <strong>UI/UX Design</strong> – menggunakan Figma, mencakup konsep user
+        experience, wireframing, prototyping, serta kolaborasi desain
+        dengan tim developer.
+      </div>
+      <div class="p-4 bg-white dark:bg-primarySoft rounded shadow border-l-4 border-secondary">
+        <strong>Digital Marketing</strong> – meliputi SEO, pengelolaan media sosial, serta penyusunan strategi pemasaran digital berbasis performa
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERTIFIKASI ================= -->
+<section id="certification" class="py-20 bg-white dark:bg-primarySoft">
+  <div class="max-w-5xl mx-auto px-6">
+    <h3 class="text-3xl font-bold mb-6 text-primary dark:text-accent">
+      Sertifikasi
+    </h3>
+    <ul class="list-disc ml-6 space-y-2">
+      <li>Metodologi Pelatihan BNSP KKNI Level 4</li>
+      <li>Fasilitator Kemendikdasmen</li>
+      <li>Tableau Data Visualization</li>
+      <li>18 Channel Digital Marketing</li>
+      <li>Figma UI & UX Web Design</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= GALERI ================= -->
+<section id="gallery" class="py-20 bg-slate-50 dark:bg-primary">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <h3 class="text-3xl font-bold mb-10 text-primary dark:text-accent">
+      Galeri Kegiatan
+    </h3>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+
+      <!-- Item -->
+      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
+        <img src="img/diklat.jpeg" alt="Diklat Online Nasional"
+          class="w-full h-48 object-cover">
+        <div class="p-3 text-center">
+          <h4 class="font-semibold text-primary dark:text-accent">
+            Diklat Online Nasional
+          </h4>
+        </div>
+      </div>
+
+      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
+        <img src="img/oracle2.jpeg" alt="Pelatihan Online Oracle APEX"
+          class="w-full h-48 object-cover">
+        <div class="p-3 text-center">
+          <h4 class="font-semibold text-primary dark:text-accent">
+            Pelatihan Online Oracle APEX
+          </h4>
+        </div>
+      </div>
+
+      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
+        <img src="img/python1.jpeg" alt="Pelatihan Online"
+          class="w-full h-48 object-cover">
+        <div class="p-3 text-center">
+          <h4 class="font-semibold text-primary dark:text-accent">
+            Pelatihan Online Python Dasar
+          </h4>
+        </div>
+      </div>
+
+      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
+        <img src="img/bnsp.jpeg" alt="Sertifikasi BNSP"
+          class="w-full h-48 object-cover">
+        <div class="p-3 text-center">
+          <h4 class="font-semibold text-primary dark:text-accent">
+            Sertifikasi BNSP
+          </h4>
+        </div>
+      </div>
+
+      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
+        <img src="img/tot.jpeg" alt="TOT"
+          class="w-full h-48 object-cover">
+        <div class="p-3 text-center">
+          <h4 class="font-semibold text-primary dark:text-accent">
+            TOT Kemendikdasmen
+          </h4>
+        </div>
+      </div>
+
+      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
+        <img src="img/cai.jpeg" alt="CAI"
+          class="w-full h-48 object-cover">
+        <div class="p-3 text-center">
+          <h4 class="font-semibold text-primary dark:text-accent">
+            Pemaparan Cinta Alam Indonesia
+          </h4>
+        </div>
+      </div>
+
+      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
+        <img src="img/ppks.jpeg" alt="Python"
+          class="w-full h-48 object-cover">
+        <div class="p-3 text-center">
+          <h4 class="font-semibold text-primary dark:text-accent">
+            Data Analis Python Pusat Penelitian Kelapa Sawit
+          </h4>
+        </div>
+      </div>
+
+      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
+        <img src="img/python2.jpeg" alt="Python Private"
+          class="w-full h-48 object-cover">
+        <div class="p-3 text-center">
+          <h4 class="font-semibold text-primary dark:text-accent">
+            Pelatihan Python Private
+          </h4>
+        </div>
+      </div>
+
+      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
+        <img src="img/python3.jpeg" alt="Python Reguler"
+          class="w-full h-48 object-cover">
+        <div class="p-3 text-center">
+          <h4 class="font-semibold text-primary dark:text-accent">
+            Pelatihan Python Reguler
+          </h4>
+        </div>
+      </div>
+
+      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
+        <img src="img/kka1.jpeg" alt="Python Private"
+          class="w-full h-48 object-cover">
+        <div class="p-3 text-center">
+          <h4 class="font-semibold text-primary dark:text-accent">
+            Pelatihan Koding & Kecerdasan Artifisial
+          </h4>
+        </div>
+      </div>
+
+      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
+        <img src="img/kka3.jpeg" alt="Python Private"
+          class="w-full h-48 object-cover">
+        <div class="p-3 text-center">
+          <h4 class="font-semibold text-primary dark:text-accent">
+            Pelatihan Koding & Kecerdasan Artifisial
+          </h4>
+        </div>
+      </div>
+
+      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
+        <img src="img/kka2.jpeg" alt="Workshop Pembuatan Modul & RPP"
+          class="w-full h-48 object-cover">
+        <div class="p-3 text-center">
+          <h4 class="font-semibold text-primary dark:text-accent">
+           Pelatihan Koding & Kecerdasan Artifisial
+          </h4>
+        </div>
+      </div>
+
+       <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
+        <img src="img/charoend.jpeg" alt="Charoend"
+          class="w-full h-48 object-cover">
+        <div class="p-3 text-center">
+          <h4 class="font-semibold text-primary dark:text-accent">
+           Workshop Server PT Charoen Pokphand Indonesia Tbk
+          </h4>
+        </div>
+      </div>
+
+       <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
+        <img src="img/oracle.jpeg" alt="Oracle"
+          class="w-full h-48 object-cover">
+        <div class="p-3 text-center">
+          <h4 class="font-semibold text-primary dark:text-accent">
+           Workshop Oracle APEX PT EMP Bentu Limited
+          </h4>
+        </div>
+      </div>
+
+       <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
+        <img src="img/kka4.jpeg" alt="Python Private"
+          class="w-full h-48 object-cover">
+        <div class="p-3 text-center">
+          <h4 class="font-semibold text-primary dark:text-accent">
+           Workshop Pembuatan Modul & RPP
+          </h4>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= KONTAK ================= -->
+<section id="contact" class="py-20 bg-white dark:bg-primarySoft">
+  <div class="max-w-5xl mx-auto px-6">
+
+    <h3 class="text-3xl font-bold mb-10 text-primary dark:text-accent">
+      Kontak
+    </h3>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <!-- WhatsApp -->
+      <div class="p-6 bg-slate-50 dark:bg-primary rounded-lg shadow 
+                  border-t-4 border-accent text-center">
+        <div class="text-4xl mb-4">📱</div>
+        <h4 class="font-semibold text-lg mb-2">WhatsApp</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+          Hubungi saya via WhatsApp
+        </p>
+        <a href="https://wa.me/628561386256"
+           target="_blank"
+           class="inline-block px-4 py-2 bg-accent text-primary 
+                  rounded hover:bg-accentSoft font-semibold transition">
+          +62 856-1386-256
+        </a>
+      </div>
+
+      <!-- Email -->
+      <div class="p-6 bg-slate-50 dark:bg-primary rounded-lg shadow 
+                  border-t-4 border-secondary text-center">
+        <div class="text-4xl mb-4">✉️</div>
+        <h4 class="font-semibold text-lg mb-2">Email</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+          Kirim pesan via email
+        </p>
+        <a href="mailto:arifin.nursalim354@gmail.com"
+           class="inline-block px-4 py-2 bg-secondary text-white 
+                  rounded hover:bg-secondarySoft transition">
+          arifin.nursalim354@gmail.com
+        </a>
+      </div>
+
+      <!-- Alamat -->
+      <div class="p-6 bg-slate-50 dark:bg-primary rounded-lg shadow 
+                  border-t-4 border-primary text-center">
+        <div class="text-4xl mb-4">📍</div>
+        <h4 class="font-semibold text-lg mb-2">Alamat</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-300">
+          Indonesia <br>
+          Bintaro - Jakarta Selatan
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+<footer class="py-6 text-center bg-primary text-accent">
+  © 2026 Muhammad Arifin Nursalim
+</footer>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const html = document.documentElement;
+
+  document.getElementById("toggleDark").onclick = () =>
+    html.classList.toggle("dark");
+
+  document.getElementById("toggleDarkMobile").onclick = () =>
+    html.classList.toggle("dark");
+
+  menuBtn.onclick = () =>
+    mobileMenu.classList.toggle("hidden");
+</script>
+<!-- ================= BACK TO TOP ================= -->
+<button id="backToTop"
+  class="hidden fixed bottom-6 right-6 z-50
+         w-12 h-12 rounded-full
+         bg-secondary text-white text-2xl
+         shadow-lg hover:bg-secondarySoft
+         transition duration-300">
+  ↑
+</button>
+<script>
+  const backToTop = document.getElementById("backToTop");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      backToTop.classList.remove("hidden");
+    } else {
+      backToTop.classList.add("hidden");
+    }
+  });
+
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+</script>
+
+</body>
+</html>
