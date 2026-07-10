@@ -1,567 +1,741 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profil | Muhammad Arifin Nursalim</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Arifin Nursalim — Trainer IT & Data Analyst</title>
+<meta name="description" content="Muhammad Arifin Nursalim, S.Kom — Trainer IT, Data Analyst, dan Praktisi Digital Marketing dengan 7+ tahun pengalaman.">
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            primary: '#0F172A',       // Biru dongker
-            primarySoft: '#1E293B',
-            accent: '#F59E0B',        // Kuning emas
-            accentSoft: '#FCD34D',
-            secondary: '#7F1D1D',     // Merah dongker
-            secondarySoft: '#991B1B',
-          }
-        }
-      }
-    }
-  </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#F4F0E6;
+    --ink-dim:#B9B2A4;
+    --accent:#F2B705;
+    --accent-ink:#211705;
+    --teal:#4FD8CE;
+    --coral:#EC7B4E;
+    --glass:rgba(255,255,255,0.045);
+    --glass-strong:rgba(255,255,255,0.09);
+    --glass-border:rgba(255,255,255,0.13);
+    --radius:16px;
+    --bg-current:#0A0D18;
+    --maxw:1180px;
+    --font-display:"Space Grotesk", sans-serif;
+    --font-body:"Manrope", sans-serif;
+    --font-mono:"JetBrains Mono", monospace;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--font-body);
+    color:var(--ink);
+    min-height:100vh;
+    overflow-x:hidden;
+    line-height:1.6;
+  }
+
+  ::selection{ background:var(--accent); color:var(--accent-ink); }
+
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; }
+  img{ display:block; max-width:100%; }
+
+  /* ===== Fixed scroll-driven scene ===== */
+  .bg-scene{
+    position:fixed; inset:0; z-index:-3;
+    background:var(--bg-current);
+  }
+  .bg-texture{
+    position:fixed; inset:0; z-index:-2;
+    opacity:.05; mix-blend-mode:overlay; pointer-events:none;
+    background-image:
+      linear-gradient(45deg, transparent 46%, currentColor 46% 50%, transparent 50% 96%, currentColor 96%),
+      linear-gradient(-45deg, transparent 46%, currentColor 46% 50%, transparent 50% 96%, currentColor 96%);
+    background-size:64px 64px;
+    color:var(--ink);
+  }
+  .bg-vignette{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:radial-gradient(120% 90% at 50% -10%, rgba(0,0,0,0) 0%, rgba(0,0,0,.35) 100%);
+  }
+
+  /* ===== Scroll progress ===== */
+  #scrollbar{
+    position:fixed; top:0; left:0; height:3px; width:0%;
+    background:var(--accent); z-index:100;
+    box-shadow:0 0 12px var(--accent);
+  }
+
+  /* ===== Layout helpers ===== */
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+  section{ padding:110px 0; position:relative; }
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:.8rem; letter-spacing:.04em;
+    color:var(--accent);
+    display:inline-flex; align-items:center; gap:8px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{ content:"$"; opacity:.6; }
+  h2.title{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:clamp(2rem, 4vw, 2.9rem);
+    letter-spacing:-0.01em;
+    margin-bottom:40px;
+    max-width:20ch;
+  }
+
+  /* ===== Nav ===== */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:90;
+    background:rgba(6,8,14,.62);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--glass-border);
+  }
+  .nav-inner{
+    max-width:var(--maxw); margin:0 auto; padding:14px 24px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .logo{
+    font-family:var(--font-mono); font-size:.95rem; color:var(--ink);
+    display:flex; align-items:center; gap:2px;
+  }
+  .logo b{ color:var(--accent); font-weight:600; }
+  .cursor-blink{
+    display:inline-block; width:8px; height:1.1em; background:var(--accent);
+    margin-left:4px; animation:blink 1.1s steps(1) infinite; vertical-align:-2px;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .nav-links{ display:flex; align-items:center; gap:28px; }
+  .nav-links a{
+    font-size:.88rem; color:var(--ink-dim); font-weight:500;
+    position:relative; padding:4px 0; transition:color .2s;
+  }
+  .nav-links a:hover, .nav-links a.active{ color:var(--ink); }
+  .nav-links a.active::after{
+    content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px;
+    background:var(--accent); border-radius:2px;
+  }
+  .menu-btn{
+    display:none; background:none; border:1px solid var(--glass-border);
+    color:var(--ink); font-size:1.1rem; width:38px; height:38px; border-radius:8px;
+    cursor:pointer;
+  }
+  #mobileMenu{
+    display:none; flex-direction:column; gap:2px; padding:10px 24px 20px;
+    background:rgba(6,8,14,.9);
+  }
+  #mobileMenu a{ padding:10px 4px; border-bottom:1px solid var(--glass-border); font-size:.92rem; color:var(--ink-dim); }
+
+  @media (max-width:860px){
+    .nav-links{ display:none; }
+    .menu-btn{ display:block; }
+  }
+
+  /* ===== Hero ===== */
+  #home{ padding-top:170px; padding-bottom:120px; min-height:100vh; display:flex; align-items:center; }
+  .hero-grid{
+    display:grid; grid-template-columns:1.15fr .85fr; gap:64px; align-items:center;
+  }
+  .role-pills{ display:flex; flex-wrap:wrap; gap:10px; margin:20px 0 30px; }
+  .pill{
+    font-family:var(--font-mono); font-size:.78rem; padding:7px 14px;
+    border-radius:999px; border:1px solid var(--glass-border); background:var(--glass);
+    color:var(--ink-dim);
+  }
+  .pill.gold{ color:var(--accent); border-color:rgba(242,183,5,.4); }
+  .pill.teal{ color:var(--teal); border-color:rgba(79,216,206,.35); }
+  .pill.coral{ color:var(--coral); border-color:rgba(236,123,78,.35); }
+
+  h1.hero-name{
+    font-family:var(--font-display); font-weight:700;
+    font-size:clamp(2.3rem, 5.2vw, 3.6rem); line-height:1.08; letter-spacing:-0.015em;
+  }
+  .hero-sub{ color:var(--ink-dim); font-size:1.05rem; margin-top:16px; max-width:46ch; }
+
+  .btn-row{ display:flex; flex-wrap:wrap; gap:14px; margin-top:34px; }
+  .btn{
+    font-weight:600; font-size:.92rem; padding:13px 26px; border-radius:10px;
+    display:inline-flex; align-items:center; gap:8px; transition:transform .15s, box-shadow .15s;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-solid{ background:var(--accent); color:var(--accent-ink); box-shadow:0 8px 24px -8px rgba(242,183,5,.5); }
+  .btn-outline{ border:1px solid var(--glass-border); color:var(--ink); background:var(--glass); }
+
+  .stat-row{ display:flex; gap:34px; margin-top:44px; flex-wrap:wrap; }
+  .stat b{ font-family:var(--font-display); font-size:1.6rem; display:block; color:var(--accent); }
+  .stat span{ font-size:.78rem; color:var(--ink-dim); font-family:var(--font-mono); }
+
+  .term-frame{
+    border-radius:14px; overflow:hidden; border:1px solid var(--glass-border);
+    background:var(--glass); box-shadow:0 30px 60px -20px rgba(0,0,0,.55);
+  }
+  .term-bar{
+    display:flex; align-items:center; gap:7px; padding:10px 14px;
+    background:rgba(0,0,0,.28); border-bottom:1px solid var(--glass-border);
+  }
+  .term-dot{ width:10px; height:10px; border-radius:50%; }
+  .term-bar span:last-child{
+    margin-left:auto; font-family:var(--font-mono); font-size:.72rem; color:var(--ink-dim);
+  }
+  .term-frame img{ width:100%; aspect-ratio:1/1; object-fit:cover; }
+
+  /* ===== Glass card base ===== */
+  .card{
+    background:var(--glass); border:1px solid var(--glass-border); border-radius:var(--radius);
+    padding:26px;
+  }
+
+  /* ===== About ===== */
+  .about-grid{ display:grid; grid-template-columns:1.3fr .9fr; gap:56px; align-items:start; }
+  .about-grid p{ color:var(--ink-dim); font-size:1.02rem; }
+  .stats-stack{ display:flex; flex-direction:column; gap:14px; }
+  .stats-stack .card{ display:flex; align-items:center; gap:16px; }
+  .stats-stack b{ font-family:var(--font-display); font-size:1.9rem; color:var(--accent); min-width:64px; }
+  .stats-stack small{ color:var(--ink-dim); font-size:.82rem; font-family:var(--font-mono); }
+
+  @media (max-width:860px){ .about-grid, .hero-grid{ grid-template-columns:1fr; } }
+
+  /* ===== Experience ===== */
+  .exp-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  .exp-card{
+    background:var(--glass); border:1px solid var(--glass-border); border-left:3px solid var(--accent);
+    border-radius:12px; padding:20px 22px;
+  }
+  .exp-tag{
+    font-family:var(--font-mono); font-size:.7rem; letter-spacing:.06em;
+    color:var(--accent); display:block; margin-bottom:8px;
+  }
+  .exp-card strong{ font-family:var(--font-display); font-size:1.02rem; display:block; margin-bottom:6px; }
+  .exp-card p{ color:var(--ink-dim); font-size:.9rem; }
+  @media (max-width:700px){ .exp-grid{ grid-template-columns:1fr; } }
+
+  /* ===== Certification ===== */
+  .cert-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; }
+  .cert-card{
+    background:var(--glass); border:1px solid var(--glass-border); border-radius:12px;
+    padding:20px; display:flex; gap:14px; align-items:flex-start;
+  }
+  .cert-icon{
+    width:38px; height:38px; border-radius:9px; background:rgba(242,183,5,.12);
+    color:var(--accent); display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    font-size:1.1rem;
+  }
+  .cert-card span{ font-size:.92rem; font-weight:500; }
+
+  /* ===== Gallery ===== */
+  .gallery-note{ color:var(--ink-dim); font-size:.9rem; margin:-24px 0 30px; }
+  .gallery-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; }
+  .g-item{
+    position:relative; border-radius:12px; overflow:hidden; border:1px solid var(--glass-border);
+    cursor:pointer; aspect-ratio:4/3;
+  }
+  .g-item img{ width:100%; height:100%; object-fit:cover; transition:transform .4s; }
+  .g-item:hover img{ transform:scale(1.06); }
+  .g-cap{
+    position:absolute; left:0; right:0; bottom:0; padding:10px 12px 8px;
+    background:linear-gradient(to top, rgba(0,0,0,.85), transparent);
+    font-size:.78rem; font-weight:600;
+  }
+  .g-cap small{ display:block; font-family:var(--font-mono); font-weight:400; color:var(--accent); font-size:.66rem; margin-top:2px; }
+
+  /* ===== Video ===== */
+  .video-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+  .video-card{ border-radius:14px; overflow:hidden; border:1px solid var(--glass-border); background:var(--glass); }
+  .video-top{
+    display:flex; align-items:center; gap:8px; padding:9px 14px; background:rgba(0,0,0,.28);
+    font-family:var(--font-mono); font-size:.72rem; color:var(--ink-dim); border-bottom:1px solid var(--glass-border);
+  }
+  .video-aspect{ aspect-ratio:16/9; }
+  .video-aspect iframe{ width:100%; height:100%; border:0; }
+  .video-meta{ padding:14px 16px; }
+  .video-meta h4{ font-family:var(--font-display); font-size:.98rem; margin-bottom:4px; }
+  .video-meta p{ font-size:.76rem; color:var(--ink-dim); font-family:var(--font-mono); }
+  @media (max-width:760px){ .video-grid{ grid-template-columns:1fr; } }
+
+  /* ===== Testimonial ===== */
+  .testimonial-viewport{
+    overflow:hidden; position:relative;
+    -webkit-mask-image:linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image:linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+  .testimonial-track{ display:flex; width:max-content; animation:scroll-ltr 46s linear infinite; }
+  .testimonial-track:hover{ animation-play-state:paused; }
+  @keyframes scroll-ltr{ 0%{ transform:translateX(-50%); } 100%{ transform:translateX(0%); } }
+  .t-card{
+    width:320px; flex-shrink:0; padding:24px; border-radius:14px;
+    background:var(--glass); border:1px solid var(--glass-border);
+  }
+  .t-quote{ font-family:var(--font-mono); color:var(--accent); font-size:1.1rem; }
+  .t-card p{ font-size:.9rem; color:var(--ink-dim); margin:8px 0 16px; }
+  .t-card h4{ font-family:var(--font-display); font-size:.96rem; }
+  .t-card small{ color:var(--ink-dim); font-size:.76rem; }
+
+  /* ===== Contact ===== */
+  .contact-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .c-card{
+    background:var(--glass); border:1px solid var(--glass-border); border-radius:14px;
+    padding:26px; text-align:left;
+  }
+  .c-icon{ font-size:1.6rem; margin-bottom:14px; }
+  .c-cmd{ font-family:var(--font-mono); font-size:.72rem; color:var(--accent); display:block; margin-bottom:6px; }
+  .c-card h4{ font-family:var(--font-display); font-size:1.05rem; margin-bottom:8px; }
+  .c-card p{ color:var(--ink-dim); font-size:.85rem; margin-bottom:16px; }
+  .c-card a.link{
+    font-family:var(--font-mono); font-size:.85rem; color:var(--ink); border-bottom:1px dashed var(--glass-border);
+    padding-bottom:2px;
+  }
+  .c-card a.link:hover{ color:var(--accent); border-color:var(--accent); }
+  @media (max-width:820px){ .contact-grid{ grid-template-columns:1fr; } }
+
+  /* ===== Footer ===== */
+  footer{ padding:36px 0; text-align:center; border-top:1px solid var(--glass-border); }
+  footer p{ font-family:var(--font-mono); font-size:.76rem; color:var(--ink-dim); }
+
+  /* ===== Back to top ===== */
+  #backToTop{
+    position:fixed; bottom:24px; right:24px; z-index:60;
+    width:46px; height:46px; border-radius:50%; border:1px solid var(--glass-border);
+    background:rgba(10,12,20,.75); backdrop-filter:blur(8px); color:var(--accent);
+    font-family:var(--font-mono); font-size:1.1rem; cursor:pointer;
+    opacity:0; pointer-events:none; transition:opacity .25s, transform .25s;
+  }
+  #backToTop.show{ opacity:1; pointer-events:auto; }
+  #backToTop:hover{ transform:translateY(-3px); }
+
+  /* ===== Lightbox ===== */
+  #lightbox{
+    position:fixed; inset:0; z-index:200; display:none;
+    background:rgba(4,5,9,.9); backdrop-filter:blur(6px);
+    align-items:center; justify-content:center; padding:20px;
+  }
+  #lightbox.open{ display:flex; }
+  .lb-box{ position:relative; max-width:900px; width:100%; }
+  .lb-box img{ width:100%; max-height:80vh; object-fit:contain; border-radius:10px; }
+  #closeLightbox{
+    position:absolute; top:-42px; right:0; background:none; border:0; color:var(--ink);
+    font-size:1.6rem; cursor:pointer;
+  }
+  #lightboxCaption{ text-align:center; margin-top:14px; font-family:var(--font-mono); font-size:.85rem; color:var(--ink-dim); }
+
+  @media (prefers-reduced-motion:reduce){
+    .testimonial-track{ animation:none; }
+    .cursor-blink{ animation:none; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
 </head>
 
-<body class="bg-slate-50 text-primary dark:bg-slate-950 dark:text-slate-100">
+<body>
+
+<div class="bg-scene" id="bgScene"></div>
+<div class="bg-texture"></div>
+<div class="bg-vignette"></div>
+<div id="scrollbar"></div>
 
 <!-- ================= NAVBAR ================= -->
-<nav class="fixed w-full top-0 bg-primary text-white shadow z-50">
-  <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-
-    <h1 class="text-xl font-bold tracking-wide">Arifin</h1>
-
-    <!-- Desktop Menu -->
-    <div class="hidden md:flex items-center space-x-6">
-      <a href="#home" class="hover:text-accent transition">Home</a>
-      <a href="#about" class="hover:text-accent transition">Tentang Saya</a>
-      <a href="#experience" class="hover:text-accent transition">Pengalaman</a>
-      <a href="#certification" class="hover:text-accent transition">Sertifikasi</a>
-      <a href="#gallery" class="hover:text-accent transition">Galeri</a>
-      <a href="#contact" class="hover:text-accent transition">Kontak</a>
-
-      <button id="toggleDark"
-        class="px-3 py-1 rounded bg-primarySoft hover:bg-accent hover:text-primary transition">
-        🌙
-      </button>
+<nav>
+  <div class="nav-inner">
+    <div class="logo">arifin<b>@</b>trainer:~$<span class="cursor-blink"></span></div>
+    <div class="nav-links" id="navLinks">
+      <a href="#home">home</a>
+      <a href="#about">tentang</a>
+      <a href="#experience">pengalaman</a>
+      <a href="#certification">sertifikasi</a>
+      <a href="#gallery">galeri</a>
+      <a href="#video-gallery">video</a>
+      <a href="#testimonial">testimoni</a>
+      <a href="#contact">kontak</a>
     </div>
-
-    <!-- Mobile Button -->
-    <button id="menuBtn" class="md:hidden text-2xl">☰</button>
+    <button id="menuBtn" class="menu-btn" aria-label="Menu">☰</button>
   </div>
-
-  <!-- Mobile Menu -->
-  <div id="mobileMenu"
-    class="hidden md:hidden bg-primarySoft text-white px-6 pb-4 space-y-3">
-    <a href="#home" class="block hover:text-accent">Home</a>
-    <a href="#about" class="block hover:text-accent">Tentang Saya</a>
-    <a href="#experience" class="block hover:text-accent">Pengalaman</a>
-    <a href="#certification" class="block hover:text-accent">Sertifikasi</a>
-    <a href="#gallery" class="block hover:text-accent">Galeri</a>
-    <a href="#contact" class="block hover:text-accent">Kontak</a>
-
-    <button id="toggleDarkMobile"
-      class="w-full py-2 rounded bg-accent text-primary font-semibold">
-      🌙 Mode Gelap
-    </button>
+  <div id="mobileMenu">
+    <a href="#home">home</a>
+    <a href="#about">tentang</a>
+    <a href="#experience">pengalaman</a>
+    <a href="#certification">sertifikasi</a>
+    <a href="#gallery">galeri</a>
+    <a href="#video-gallery">video</a>
+    <a href="#testimonial">testimoni</a>
+    <a href="#contact">kontak</a>
   </div>
 </nav>
 
 <!-- ================= HERO ================= -->
-<section id="home"
-  class="pt-36 pb-24 bg-gradient-to-b from-primary to-primarySoft text-white">
-  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
-
-    <img src="img/f-arifin.jpg"
-      alt="Foto Muhammad Arifin Nursalim"
-      class="w-52 h-52 md:w-56 md:h-56 rounded-full object-cover
-             border-4 border-accent shadow-xl">
-
-    <div class="text-center md:text-left">
-      <h2 class="text-4xl font-bold mb-4">
-        Muhammad Arifin Nursalim, S.Kom
-      </h2>
-      <p class="text-xl text-accentSoft mb-6">
-        Trainer IT • Data Analyst • Praktisi IT
-      </p>
-
-      <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-        <a href="#contact"
-          class="px-6 py-3 bg-accent text-primary rounded-lg font-semibold hover:bg-accentSoft transition">
-          Hubungi Saya
-        </a>
-        <a href="#about"
-          class="px-6 py-3 border border-accent text-accent rounded-lg hover:bg-accent hover:text-primary transition">
-          Tentang Saya
-        </a>
+<section id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">whoami</div>
+      <h1 class="hero-name">Muhammad Arifin<br>Nursalim, S.Kom</h1>
+      <div class="role-pills">
+        <span class="pill gold">Trainer IT</span>
+        <span class="pill teal">Data Analyst</span>
+        <span class="pill coral">Praktisi Digital Marketing</span>
+      </div>
+      <p class="hero-sub">Mengajar dan mendampingi institusi serta bisnis di seluruh Indonesia untuk mengambil keputusan berbasis data, membangun sistem digital, dan menyusun strategi pemasaran yang terukur.</p>
+      <div class="btn-row">
+        <a href="#contact" class="btn btn-solid">Hubungi Saya →</a>
+        <a href="#about" class="btn btn-outline">Tentang Saya</a>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><b>7+</b><span>TAHUN PENGALAMAN</span></div>
+        <div class="stat"><b>7</b><span>BIDANG KEAHLIAN</span></div>
+        <div class="stat"><b>5</b><span>SERTIFIKASI</span></div>
       </div>
     </div>
 
+    <div class="term-frame">
+      <div class="term-bar">
+        <span class="term-dot" style="background:#EC6A5E"></span>
+        <span class="term-dot" style="background:#F2B705"></span>
+        <span class="term-dot" style="background:#4FD8CE"></span>
+        <span>foto-profil.jpg</span>
+      </div>
+      <img src="img/me2.png" alt="Foto Muhammad Arifin Nursalim">
+    </div>
   </div>
 </section>
 
 <!-- ================= TENTANG ================= -->
-<section id="about" class="py-20 bg-white dark:bg-primarySoft">
-  <div class="max-w-5xl mx-auto px-6">
-    <h3 class="text-3xl font-bold mb-6 text-primary dark:text-accent">
-      Tentang Saya
-    </h3>
-    <p class="leading-relaxed">
-     Saya adalah seorang pengajar profesional dengan pengalaman lebih
-dari 7 tahun di bidang Data Analysis, Teknologi Informasi, dan
-Digital Marketing. Berlatar belakang sebagai IT di beberapa perusahaan,
-saya telah membantu berbagai bisnis dan institusi dalam
-mengoptimalkan pengambilan keputusan berbasis data,
-mengembangkan sistem berbasis teknologi, serta menyusun strategi
-pemasaran digital yang efektif dan terukur.
-
-Keahlian saya meliputi pengolahan dan visualisasi data, pemrograman, serta kampanye digital marketing. Saya berkomitmen untuk terus belajar dan
-berbagi pengetahuan guna menciptakan dampak positif melalui teknologi.
-    </p>
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <div class="eyebrow">cat tentang.md</div>
+      <h2 class="title">Tentang Saya</h2>
+      <p>Saya adalah seorang pengajar profesional dengan pengalaman lebih dari 7 tahun di bidang Data Analysis, Teknologi Informasi, dan Digital Marketing. Berlatar belakang sebagai IT di beberapa perusahaan, saya telah membantu berbagai bisnis dan institusi dalam mengoptimalkan pengambilan keputusan berbasis data, mengembangkan sistem berbasis teknologi, serta menyusun strategi pemasaran digital yang efektif dan terukur.</p>
+      <br>
+      <p>Keahlian saya meliputi pengolahan dan visualisasi data, pemrograman, serta kampanye digital marketing. Saya berkomitmen untuk terus belajar dan berbagi pengetahuan guna menciptakan dampak positif melalui teknologi.</p>
+    </div>
+    <div class="stats-stack">
+      <div class="card"><b>7+</b><div><small>TAHUN</small><br>Pengalaman mengajar & praktisi IT</div></div>
+      <div class="card"><b>7</b><div><small>BIDANG</small><br>Data, web, desain, hingga marketing</div></div>
+      <div class="card"><b>5</b><div><small>SERTIFIKASI</small><br>Profesional & terverifikasi</div></div>
+    </div>
   </div>
 </section>
 
 <!-- ================= PENGALAMAN ================= -->
-<section id="experience" class="py-20">
-  <div class="max-w-5xl mx-auto px-6">
-    <h3 class="text-3xl font-bold mb-6 text-primary dark:text-accent">
-      Pengalaman Mengajar
-    </h3>
-    <div class="space-y-4">
-      <div class="p-4 bg-white dark:bg-primarySoft rounded shadow border-l-4 border-secondary">
-        <strong>Koding dan Kecerdasan Artifisial</strong> – Pelatihan Guru-guru untuk berbagai jenjang pendidikan.
+<section id="experience">
+  <div class="wrap">
+    <div class="eyebrow">ls pengalaman/</div>
+    <h2 class="title">Pengalaman Mengajar</h2>
+    <div class="exp-grid">
+      <div class="exp-card">
+        <span class="exp-tag">[ AI / CODING ]</span>
+        <strong>Koding dan Kecerdasan Artifisial</strong>
+        <p>Pelatihan guru-guru untuk berbagai jenjang pendidikan.</p>
       </div>
-      <div class="p-4 bg-white dark:bg-primarySoft rounded shadow border-l-4 border-secondary">
-        <strong>Microsoft Excel</strong> – Untuk pengolahan data, visualisasi, dan automasi.
+      <div class="exp-card">
+        <span class="exp-tag">[ DATA ]</span>
+        <strong>Microsoft Excel</strong>
+        <p>Untuk pengolahan data, visualisasi, dan automasi.</p>
       </div>
-      <div class="p-4 bg-white dark:bg-primarySoft rounded shadow border-l-4 border-secondary">
-        <strong>Python</strong> – Untuk analisis data, automasi, dan pemrograman tingkat lanjut.
+      <div class="exp-card">
+        <span class="exp-tag">[ DATA ]</span>
+        <strong>Python</strong>
+        <p>Untuk analisis data, automasi, dan pemrograman tingkat lanjut.</p>
       </div>
-      <div class="p-4 bg-white dark:bg-primarySoft rounded shadow border-l-4 border-secondary">
-        <strong>Bahasa Pemrograman C++</strong> – Sebagai dasar logika algoritma dan pemrograman terstruktur.
+      <div class="exp-card">
+        <span class="exp-tag">[ CORE ]</span>
+        <strong>Bahasa Pemrograman C++</strong>
+        <p>Sebagai dasar logika algoritma dan pemrograman terstruktur.</p>
       </div>
-      <div class="p-4 bg-white dark:bg-primarySoft rounded shadow border-l-4 border-secondary">
-        <strong>Front-End Development</strong> – Menggunakan HTML, CSS,
-        JavaScript, Bootstrap, Tailwind CSS, Angular js dan Vue js untuk membangun antarmuka web yang responsif dan interaktif.
+      <div class="exp-card">
+        <span class="exp-tag">[ WEB ]</span>
+        <strong>Front-End Development</strong>
+        <p>HTML, CSS, JavaScript, Bootstrap, Tailwind CSS, Angular JS, dan Vue JS untuk membangun antarmuka web yang responsif dan interaktif.</p>
       </div>
-      <div class="p-4 bg-white dark:bg-primarySoft rounded shadow border-l-4 border-secondary">
-        <strong>UI/UX Design</strong> – Menggunakan Figma, mencakup konsep user
-        experience, wireframing, prototyping, serta kolaborasi desain
-        dengan tim developer.
+      <div class="exp-card">
+        <span class="exp-tag">[ DESIGN ]</span>
+        <strong>UI/UX Design</strong>
+        <p>Menggunakan Figma, mencakup konsep user experience, wireframing, prototyping, serta kolaborasi desain dengan tim developer.</p>
       </div>
-      <div class="p-4 bg-white dark:bg-primarySoft rounded shadow border-l-4 border-secondary">
-        <strong>Digital Marketing</strong> – Meliputi Pembuatan Website, Wordpress, SEO, pengelolaan media sosial, serta penyusunan strategi pemasaran digital berbasis performa
+      <div class="exp-card">
+        <span class="exp-tag">[ MARKETING ]</span>
+        <strong>Digital Marketing</strong>
+        <p>Pembuatan website, WordPress, SEO, pengelolaan media sosial, serta penyusunan strategi pemasaran digital berbasis performa.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ================= SERTIFIKASI ================= -->
-<section id="certification" class="py-20 bg-white dark:bg-primarySoft">
-  <div class="max-w-5xl mx-auto px-6">
-    <h3 class="text-3xl font-bold mb-6 text-primary dark:text-accent">
-      Sertifikasi
-    </h3>
-    <ul class="list-disc ml-6 space-y-2">
-      <li>Metodologi Pelatihan BNSP KKNI Level 4</li>
-      <li>Fasilitator Kemendikdasmen</li>
-      <li>Tableau Data Visualization</li>
-      <li>18 Channel Digital Marketing (Wordpress, SEO, Email Marketing, Konten Marketing, Dll)</li>
-      <li>Figma UI & UX Web Design</li>
-    </ul>
+<section id="certification">
+  <div class="wrap">
+    <div class="eyebrow">certifications --list</div>
+    <h2 class="title">Sertifikasi</h2>
+    <div class="cert-grid">
+      <div class="cert-card"><div class="cert-icon">🎓</div><span>Metodologi Pelatihan BNSP KKNI Level 4</span></div>
+      <div class="cert-card"><div class="cert-icon">🏅</div><span>Fasilitator Kemendikdasmen</span></div>
+      <div class="cert-card"><div class="cert-icon">📊</div><span>Tableau Data Visualization</span></div>
+      <div class="cert-card"><div class="cert-icon">📈</div><span>18 Channel Digital Marketing (WordPress, SEO, Email Marketing, Konten Marketing, Dll)</span></div>
+      <div class="cert-card"><div class="cert-icon">🎨</div><span>Figma UI & UX Web Design</span></div>
+    </div>
   </div>
 </section>
 
 <!-- ================= GALERI ================= -->
-<section id="gallery" class="py-20 bg-slate-50 dark:bg-primary">
-  <div class="max-w-6xl mx-auto px-6">
+<section id="gallery">
+  <div class="wrap">
+    <div class="eyebrow">ls galeri/*.jpg</div>
+    <h2 class="title">Galeri Kegiatan</h2>
+    <p class="gallery-note">Klik pada gambar untuk memperbesar.</p>
 
-    <h3 class="text-3xl font-bold mb-10 text-primary dark:text-accent">
-      Galeri Kegiatan
-    </h3>
-    <p>Klik Pada Gambar Untuk Memperbesar Gambar</p>
-    <br>
-
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
-
-      <!-- Item -->
-      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
-       <img src="img/diklat.jpeg"
-     alt="Diklat Online Nasional"
-     class="gallery-img w-full h-48 object-cover cursor-pointer">
-        <div class="p-3 text-center">
-          <h4 class="font-semibold text-primary dark:text-accent">
-            Diklat Online Nasional
-          </h4>
-        </div>
-      </div>
-
-      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
-        <img src="img/oracle2.jpeg"
-     alt="Pelatihan Online Oracle APEX"
-     class="gallery-img w-full h-48 object-cover cursor-pointer">
-        <div class="p-3 text-center">
-          <h4 class="font-semibold text-primary dark:text-accent">
-            Pelatihan Online Oracle APEX
-          </h4>
-        </div>
-      </div>
-
-      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
-    <img src="img/python1.jpeg"
-     alt="Pelatihan Online Python Dasar"
-     class="gallery-img w-full h-48 object-cover cursor-pointer">
-        <div class="p-3 text-center">
-          <h4 class="font-semibold text-primary dark:text-accent">
-            Pelatihan Online Python Dasar
-          </h4>
-        </div>
-      </div>
-
-      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
-        <img src="img/bnsp.jpeg"
-     alt="Sertifikasi BNSP"
-     class="gallery-img w-full h-48 object-cover cursor-pointer">
-        <div class="p-3 text-center">
-          <h4 class="font-semibold text-primary dark:text-accent">
-            Sertifikasi BNSP
-          </h4>
-        </div>
-      </div>
-
-      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
-        <img src="img/tot.jpeg"
-     alt="TOT Kemendikdasmen"
-     class="gallery-img w-full h-48 object-cover cursor-pointer">
-        <div class="p-3 text-center">
-          <h4 class="font-semibold text-primary dark:text-accent">
-            TOT Kemendikdasmen
-          </h4>
-        </div>
-      </div>
-
-      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
-      <img src="img/cai.jpeg"
-     alt="Pemaparan Cinta Alam Indonesia"
-     class="gallery-img w-full h-48 object-cover cursor-pointer">
-        <div class="p-3 text-center">
-          <h4 class="font-semibold text-primary dark:text-accent">
-            Pemaparan Cinta Alam Indonesia
-          </h4>
-        </div>
-      </div>
-
-      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
-       <img src="img/ppks.jpeg"
-     alt="Data Analis Python Pusat Penelitian Kelapa Sawit"
-     class="gallery-img w-full h-48 object-cover cursor-pointer">
-        <div class="p-3 text-center">
-          <h4 class="font-semibold text-primary dark:text-accent">
-            Data Analis Python Pusat Penelitian Kelapa Sawit
-          </h4>
-        </div>
-      </div>
-
-      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
-        <img src="img/python2.jpeg"
-     alt="Pelatihan Python Private"
-     class="gallery-img w-full h-48 object-cover cursor-pointer">
-
-        <div class="p-3 text-center">
-          <h4 class="font-semibold text-primary dark:text-accent">
-            Pelatihan Python Private
-          </h4>
-        </div>
-      </div>
-
-      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
-       <img src="img/python3.jpeg"
-     alt="Pelatihan Python Reguler"
-     class="gallery-img w-full h-48 object-cover cursor-pointer">
-
-        <div class="p-3 text-center">
-          <h4 class="font-semibold text-primary dark:text-accent">
-            Pelatihan Python Reguler
-          </h4>
-        </div>
-      </div>
-
-      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
-       <img src="img/kka1.jpeg"
-     alt="Pelatihan Koding & Kecerdasan Artifisial"
-     class="gallery-img w-full h-48 object-cover cursor-pointer">
-
-        <div class="p-3 text-center">
-          <h4 class="font-semibold text-primary dark:text-accent">
-            Pelatihan Koding & Kecerdasan Artifisial
-          </h4>
-        </div>
-      </div>
-
-      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
-       <img src="img/kka3.jpeg"
-     alt="Pelatihan Koding & Kecerdasan Artifisial"
-     class="gallery-img w-full h-48 object-cover cursor-pointer">
-
-        <div class="p-3 text-center">
-          <h4 class="font-semibold text-primary dark:text-accent">
-            Pelatihan Koding & Kecerdasan Artifisial
-          </h4>
-        </div>
-      </div>
-
-      <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
-        <img src="img/kka2.jpeg"
-     alt="Pelatihan Koding & Kecerdasan Artifisial"
-     class="gallery-img w-full h-48 object-cover cursor-pointer">
-
-        <div class="p-3 text-center">
-          <h4 class="font-semibold text-primary dark:text-accent">
-           Pelatihan Koding & Kecerdasan Artifisial
-          </h4>
-        </div>
-      </div>
-
-       <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
-        <img src="img/charoend.jpeg"
-     alt="Workshop Server PT Charoen Pokphand Indonesia Tbk"
-     class="gallery-img w-full h-48 object-cover cursor-pointer">
-
-        <div class="p-3 text-center">
-          <h4 class="font-semibold text-primary dark:text-accent">
-           Workshop Server PT Charoen Pokphand Indonesia Tbk
-          </h4>
-        </div>
-      </div>
-
-       <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
-        <img src="img/oracle.jpeg"
-     alt="Workshop Oracle APEX PT EMP Bentu Limited"
-     class="gallery-img w-full h-48 object-cover cursor-pointer">
-
-        <div class="p-3 text-center">
-          <h4 class="font-semibold text-primary dark:text-accent">
-           Workshop Oracle APEX PT EMP Bentu Limited
-          </h4>
-        </div>
-      </div>
-
-       <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
-        <img src="img/kka4.jpeg"
-     alt="Workshop Pembuatan Modul & RPP"
-     class="gallery-img w-full h-48 object-cover cursor-pointer">
-        <div class="p-3 text-center">
-          <h4 class="font-semibold text-primary dark:text-accent">
-           Workshop Pembuatan Modul & RPP
-          </h4>
-        </div>
-      </div>
-
-  <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
-        <img src="img/kai.jpg"
-     alt="Workshop Data Analis & AI PT Kereta Api Indonesia"
-     class="gallery-img w-full h-48 object-cover cursor-pointer">
-
-        <div class="p-3 text-center">
-          <h4 class="font-semibold text-primary dark:text-accent">
-           Workshop Data Analis & AI PT Kereta Api Indonesia (Persero)
-          </h4>
-        </div>
-      </div>
-
-       <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
-        <img src="img/elshinta.jpg"
-     alt="Bincang-Bincang Di Radio Elshinta Jakarta"
-     class="gallery-img w-full h-48 object-cover cursor-pointer">
-
-        <div class="p-3 text-center">
-          <h4 class="font-semibold text-primary dark:text-accent">
-           Bincang-Bincang Di Radio Elshinta Jakarta
-          </h4>
-        </div>
-      </div>
-
-       <div class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-primarySoft">
-        <img src="img/malang.jpg"
-     alt="Pelatihan Digitalisasi Desa di Malang"
-     class="gallery-img w-full h-48 object-cover cursor-pointer">
-        <div class="p-3 text-center">
-          <h4 class="font-semibold text-primary dark:text-accent">
-           Pelatihan Digitalisasi Desa di Malang
-          </h4>
-        </div>
-      </div>
-
+    <div class="gallery-grid">
+      <div class="g-item"><img class="gallery-img" src="img/diklat.jpeg" alt="Diklat Online Nasional"><div class="g-cap">Diklat Online Nasional<small>diklat.jpeg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/oracle2.jpeg" alt="Pelatihan Online Oracle APEX"><div class="g-cap">Pelatihan Online Oracle APEX<small>oracle2.jpeg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/python1.jpeg" alt="Pelatihan Online Python Dasar"><div class="g-cap">Pelatihan Online Python Dasar<small>python1.jpeg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/bnsp.jpeg" alt="Sertifikasi BNSP"><div class="g-cap">Sertifikasi BNSP<small>bnsp.jpeg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/tot.jpeg" alt="TOT Kemendikdasmen"><div class="g-cap">TOT Kemendikdasmen<small>tot.jpeg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/cai.jpeg" alt="Pemaparan Cinta Alam Indonesia"><div class="g-cap">Pemaparan Cinta Alam Indonesia<small>cai.jpeg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/ppks.jpeg" alt="Data Analis Python Pusat Penelitian Kelapa Sawit"><div class="g-cap">Data Analis Python — Pusat Penelitian Kelapa Sawit<small>ppks.jpeg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/python2.jpeg" alt="Pelatihan Python Private"><div class="g-cap">Pelatihan Python Private<small>python2.jpeg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/python3.jpeg" alt="Pelatihan Python Reguler"><div class="g-cap">Pelatihan Python Reguler<small>python3.jpeg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/kka1.jpeg" alt="Pelatihan Koding & Kecerdasan Artifisial"><div class="g-cap">Pelatihan Koding & Kecerdasan Artifisial<small>kka1.jpeg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/kka3.jpeg" alt="Pelatihan Koding & Kecerdasan Artifisial"><div class="g-cap">Pelatihan Koding & Kecerdasan Artifisial<small>kka3.jpeg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/kka2.jpeg" alt="Pelatihan Koding & Kecerdasan Artifisial"><div class="g-cap">Pelatihan Koding & Kecerdasan Artifisial<small>kka2.jpeg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/charoend.jpeg" alt="Workshop Server PT Charoen Pokphand Indonesia Tbk"><div class="g-cap">Workshop Server — PT Charoen Pokphand Indonesia Tbk<small>charoend.jpeg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/oracle.jpeg" alt="Workshop Oracle APEX PT EMP Bentu Limited"><div class="g-cap">Workshop Oracle APEX — PT EMP Bentu Limited<small>oracle.jpeg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/kka4.jpeg" alt="Workshop Pembuatan Modul & RPP"><div class="g-cap">Workshop Pembuatan Modul & RPP<small>kka4.jpeg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/kai.jpg" alt="Workshop Data Analis & AI PT Kereta Api Indonesia"><div class="g-cap">Workshop Data Analis & AI — PT Kereta Api Indonesia (Persero)<small>kai.jpg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/elshinta.jpg" alt="Bincang-Bincang Di Radio Elshinta Jakarta"><div class="g-cap">Bincang-Bincang di Radio Elshinta Jakarta<small>elshinta.jpg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/malang.jpg" alt="Pelatihan Digitalisasi Desa di Malang"><div class="g-cap">Pelatihan Digitalisasi Desa di Malang<small>malang.jpg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/aiblk.JPG" alt="Pelatihan AI BLK Kota Tangerang"><div class="g-cap">Pelatihan AI BLK Kota Tangerang<small>aiblk.JPG</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/dispora.JPG" alt="Pelatihan UMKM Pemuda Dispora Tangerang"><div class="g-cap">Pelatihan UMKM Pemuda — Dispora Tangerang<small>dispora.JPG</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/comingsoon.jpg" alt="Comingsoon"><div class="g-cap">Coming Soon<small>comingsoon.jpg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/comingsoon.jpg" alt="Comingsoon"><div class="g-cap">Coming Soon<small>comingsoon.jpg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/comingsoon.jpg" alt="Comingsoon"><div class="g-cap">Coming Soon<small>comingsoon.jpg</small></div></div>
+      <div class="g-item"><img class="gallery-img" src="img/comingsoon.jpg" alt="Comingsoon"><div class="g-cap">Coming Soon<small>comingsoon.jpg</small></div></div>
     </div>
   </div>
 </section>
 
+<!-- ================= VIDEO GALERI ================= -->
+<section id="video-gallery">
+  <div class="wrap">
+    <div class="eyebrow">play videos/</div>
+    <h2 class="title">Video Galeri</h2>
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="video-top">▶ playing.mp4</div>
+        <div class="video-aspect">
+          <iframe src="https://www.youtube.com/embed/DDhbEzW7fdg" title="Dokumentasi Pelatihan 1" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <div class="video-meta">
+          <h4>Pelatihan Diklat Nasional Online 1</h4>
+          <p>19 Ribu x Ditonton</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-top">▶ playing.mp4</div>
+        <div class="video-aspect">
+          <iframe src="https://www.youtube.com/embed/wfbNu-zAiko" title="Dokumentasi Pelatihan 2" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <div class="video-meta">
+          <h4>Pelatihan Diklat Nasional Online 2</h4>
+          <p>13 Ribu x Ditonton</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONI ================= -->
+<section id="testimonial">
+  <div class="wrap" style="margin-bottom:40px;">
+    <div class="eyebrow">testimonials --recent</div>
+    <h2 class="title">Testimoni</h2>
+  </div>
+
+  <div class="testimonial-viewport">
+    <div class="testimonial-track" id="testimonialTrack">
+      <div class="testimonial-set" style="display:flex; gap:20px; padding-right:20px;">
+
+        <div class="t-card"><span class="t-quote">&gt;</span><p>Materinya disampaikan dengan sangat fun, enjoy , runtut dan mudah dipahami. Cocok untuk pemula maupun yang sudah berpengalaman.</p><h4>Fatania Latifa</h4><small>Pajak PT KAI Persero</small></div>
+
+        <div class="t-card"><span class="t-quote">&gt;</span><p>Pelatihan Data analisnya sangat aplikatif, langsung bisa dipraktikkan untuk pekerjaan sehari-hari di kantor. Dan cara menerangkannya enak, mudah dipahami dan yang seru ada ice breakingnya.</p><h4>Bayu</h4><small>Pajak PT KAI Persero</small></div>
+
+        <div class="t-card"><span class="t-quote">&gt;</span><p>Sebagai fasilitator, Pak Arifin sangat sabar menjelaskan konsep AI kepada para guru-guru yang baru pertama kali belajar coding. Materi belajar fun, menyenangkan dan tidak membosankan.</p><h4>Sherly Melinda</h4><small>Guru SMPN 14 Kota Serang</small></div>
+
+        <div class="t-card"><span class="t-quote">&gt;</span><p>Service bagus, hanya beberapa aspek harus ditingkatkan. So far guru dan team nya helpfull dan ramah. Terima kasih banyak.</p><h4>Ulfa Widyasari</h4><small>Peserta Coding Studio</small></div>
+
+        <div class="t-card"><span class="t-quote">&gt;</span><p>Penjelasan Pak Arifin mudah dipahami, pandai mengemas kondisi belajar dan saya bisa pede berbicara didepan kelas karena sering dilakukan presentasi bergilir selama proses pembelajaran.</p><h4>Retno Wulandari</h4><small>Pelatihan AI BLK Kota Tangerang</small></div>
+
+        <div class="t-card"><span class="t-quote">&gt;</span><p>Pak Arifin sangat berpengalaman dan cepat beradaptasi dengan pesertanya. Anak-anak sangat senang dan semangat belajar bersama Pak Arifin, kedat</p><h4>Agus Setiawan</h4><small>Perangkat Desa, Malang</small></div>
+
+        <div class="t-card"><span class="t-quote">&gt;</span><p>Pelatihan UI/UX dengan Figma sangat interaktif, langsung praktik membuat wireframe dan prototype. Desain nya juga dapat menyesuaikan permintaan klien</p><h4>Maya Puspita</h4><small>UI UX Frelance</small></div>
+
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ================= KONTAK ================= -->
-<section id="contact" class="py-20 bg-white dark:bg-primarySoft">
-  <div class="max-w-5xl mx-auto px-6">
+<section id="contact">
+  <div class="wrap">
+    <div class="eyebrow">contact --help</div>
+    <h2 class="title">Kontak</h2>
 
-    <h3 class="text-3xl font-bold mb-10 text-primary dark:text-accent">
-      Kontak
-    </h3>
-
-    <div class="grid md:grid-cols-3 gap-6">
-
-      <!-- WhatsApp -->
-      <div class="p-6 bg-slate-50 dark:bg-primary rounded-lg shadow 
-                  border-t-4 border-accent text-center">
-        <div class="text-4xl mb-4">📱</div>
-        <h4 class="font-semibold text-lg mb-2">WhatsApp</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
-          Hubungi saya via WhatsApp
-        </p>
-        <a href="https://wa.me/628561386256"
-           target="_blank"
-           class="inline-block px-4 py-2 bg-accent text-primary 
-                  rounded hover:bg-accentSoft font-semibold transition">
-          +62 856-1386-256
-        </a>
+    <div class="contact-grid">
+      <div class="c-card">
+        <div class="c-icon">📱</div>
+        <span class="c-cmd">--whatsapp</span>
+        <h4>WhatsApp</h4>
+        <p>Hubungi saya via WhatsApp untuk diskusi pelatihan atau kerja sama.</p>
+        <a class="link" href="https://wa.me/628561386256" target="_blank">+62 856-1386-256</a>
       </div>
-
-      <!-- Email -->
-      <div class="p-6 bg-slate-50 dark:bg-primary rounded-lg shadow 
-                  border-t-4 border-secondary text-center">
-        <div class="text-4xl mb-4">✉️</div>
-        <h4 class="font-semibold text-lg mb-2">Email</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
-          Kirim pesan via email
-        </p>
-        <a href="mailto:arifin.nursalim354@gmail.com"
-           class="inline-block px-4 py-2 bg-secondary text-white 
-                  rounded hover:bg-secondarySoft transition">
-          arifin.nursalim354@gmail.com
-        </a>
+      <div class="c-card">
+        <div class="c-icon">✉️</div>
+        <span class="c-cmd">--email</span>
+        <h4>Email</h4>
+        <p>Kirim pesan atau proposal kerja sama melalui email.</p>
+        <a class="link" href="mailto:arifin.nursalim354@gmail.com">arifin.nursalim354@gmail.com</a>
       </div>
-
-      <!-- Alamat -->
-      <div class="p-6 bg-slate-50 dark:bg-primary rounded-lg shadow 
-                  border-t-4 border-primary text-center">
-        <div class="text-4xl mb-4">📍</div>
-        <h4 class="font-semibold text-lg mb-2">Alamat</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-300">
-          Indonesia <br>
-          Bintaro - Jakarta Selatan
-        </p>
+      <div class="c-card">
+        <div class="c-icon">📍</div>
+        <span class="c-cmd">--location</span>
+        <h4>Alamat</h4>
+        <p>Berbasis di Jakarta, siap mengajar secara daring maupun luring.</p>
+        <a class="link" href="#" onclick="return false;">Bintaro, Jakarta Selatan — Indonesia</a>
       </div>
-
     </div>
   </div>
 </section>
 
-
-<!-- ================= FOOTER ================= -->
-<footer class="py-6 text-center bg-primary text-accent">
-  © 2026 Muhammad Arifin Nursalim
+<footer>
+  <p>© 2026 Muhammad Arifin Nursalim — dibangun dengan kode & kopi</p>
 </footer>
 
-<!-- ================= SCRIPT ================= -->
-<script>
-  const menuBtn = document.getElementById("menuBtn");
-  const mobileMenu = document.getElementById("mobileMenu");
-  const html = document.documentElement;
+<button id="backToTop" aria-label="Kembali ke atas">↑</button>
 
-  document.getElementById("toggleDark").onclick = () =>
-    html.classList.toggle("dark");
-
-  document.getElementById("toggleDarkMobile").onclick = () =>
-    html.classList.toggle("dark");
-
-  menuBtn.onclick = () =>
-    mobileMenu.classList.toggle("hidden");
-</script>
-<!-- ================= BACK TO TOP ================= -->
-<button id="backToTop"
-  class="hidden fixed bottom-6 right-6 z-50
-         w-12 h-12 rounded-full
-         bg-secondary text-white text-2xl
-         shadow-lg hover:bg-secondarySoft
-         transition duration-300">
-  ↑
-</button>
-<script>
-  const backToTop = document.getElementById("backToTop");
-
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 300) {
-      backToTop.classList.remove("hidden");
-    } else {
-      backToTop.classList.add("hidden");
-    }
-  });
-
-  backToTop.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  });
-</script>
-<!-- ================= LIGHTBOX MODAL ================= -->
-<div id="lightbox"
-     class="fixed inset-0 z-50 hidden
-            bg-black/80 backdrop-blur-sm
-            flex items-center justify-center px-4">
-
-  <div class="relative max-w-5xl w-full">
-    
-    <!-- Close Button -->
-    <button id="closeLightbox"
-      class="absolute -top-10 right-0
-             text-white text-3xl
-             hover:text-accent transition">
-      ✕
-    </button>
-
-    <!-- Image -->
-    <img id="lightboxImg"
-         src=""
-         alt=""
-         class="w-full max-h-[85vh] object-contain rounded-lg shadow-2xl">
-
-    <!-- Caption -->
-    <p id="lightboxCaption"
-       class="mt-4 text-center text-white text-lg font-semibold">
-    </p>
+<!-- ================= LIGHTBOX ================= -->
+<div id="lightbox">
+  <div class="lb-box">
+    <button id="closeLightbox" aria-label="Tutup">✕</button>
+    <img id="lightboxImg" src="" alt="">
+    <p id="lightboxCaption"></p>
   </div>
 </div>
 
 <script>
+  /* ---------- Mobile menu ---------- */
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+  menuBtn.onclick = () => {
+    mobileMenu.style.display = mobileMenu.style.display === "flex" ? "none" : "flex";
+  };
+  document.querySelectorAll("#mobileMenu a").forEach(a=>{
+    a.addEventListener("click", ()=> mobileMenu.style.display = "none");
+  });
+
+  /* ---------- Testimonial loop ---------- */
+  const track = document.getElementById("testimonialTrack");
+  const originalSet = track.querySelector(".testimonial-set");
+  const clone = originalSet.cloneNode(true);
+  clone.setAttribute("aria-hidden", "true");
+  track.appendChild(clone);
+
+  /* ---------- Back to top ---------- */
+  const backToTop = document.getElementById("backToTop");
+  backToTop.addEventListener("click", () => window.scrollTo({top:0, behavior:"smooth"}));
+
+  /* ---------- Lightbox ---------- */
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightboxImg");
   const lightboxCaption = document.getElementById("lightboxCaption");
-  const closeLightbox = document.getElementById("closeLightbox");
-
-  document.querySelectorAll(".gallery-img").forEach(img => {
-    img.addEventListener("click", () => {
+  document.getElementById("closeLightbox").addEventListener("click", ()=> lightbox.classList.remove("open"));
+  lightbox.addEventListener("click", (e)=>{ if(e.target === lightbox) lightbox.classList.remove("open"); });
+  document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") lightbox.classList.remove("open"); });
+  document.querySelectorAll(".gallery-img").forEach(img=>{
+    img.addEventListener("click", ()=>{
       lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
       lightboxCaption.textContent = img.alt;
-      lightbox.classList.remove("hidden");
+      lightbox.classList.add("open");
     });
   });
 
-  closeLightbox.addEventListener("click", () => {
-    lightbox.classList.add("hidden");
-  });
+  /* ---------- Scroll-driven colour scene + progress + active nav ---------- */
+  const stopsDef = [
+    { id:"home",           hex:"#0A0D18" },
+    { id:"about",          hex:"#0B3441" },
+    { id:"experience",     hex:"#0C4653" },
+    { id:"certification",  hex:"#4A3A10" },
+    { id:"gallery",        hex:"#6E4C14" },
+    { id:"video-gallery",  hex:"#5C3420" },
+    { id:"testimonial",    hex:"#5A1731" },
+    { id:"contact",        hex:"#2C1030" },
+  ];
 
-  lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) {
-      lightbox.classList.add("hidden");
+  function hexToRgb(hex){
+    const n = parseInt(hex.slice(1), 16);
+    return [(n>>16)&255, (n>>8)&255, n&255];
+  }
+  const stopRgb = stopsDef.map(s => hexToRgb(s.hex));
+
+  let stopFracs = [];
+  function computeStops(){
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    stopFracs = stopsDef.map(s=>{
+      const el = document.getElementById(s.id);
+      return docHeight > 0 ? el.offsetTop / docHeight : 0;
+    });
+  }
+
+  const bgScene = document.getElementById("bgScene");
+  const scrollbar = document.getElementById("scrollbar");
+  const navLinkEls = document.querySelectorAll(".nav-links a");
+  const sectionIds = stopsDef.map(s=>s.id);
+
+  function lerp(a,b,t){ return a + (b-a)*t; }
+
+  function onScroll(){
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const t = docHeight > 0 ? Math.min(Math.max(window.scrollY / docHeight, 0), 1) : 0;
+    scrollbar.style.width = (t*100) + "%";
+
+    let i = 0;
+    while (i < stopFracs.length - 2 && t > stopFracs[i+1]) i++;
+    const localT = (stopFracs[i+1] - stopFracs[i]) > 0
+      ? (t - stopFracs[i]) / (stopFracs[i+1] - stopFracs[i])
+      : 0;
+    const clampedLocalT = Math.min(Math.max(localT, 0), 1);
+    const c1 = stopRgb[i], c2 = stopRgb[i+1];
+    const r = Math.round(lerp(c1[0], c2[0], clampedLocalT));
+    const g = Math.round(lerp(c1[1], c2[1], clampedLocalT));
+    const b = Math.round(lerp(c1[2], c2[2], clampedLocalT));
+    bgScene.style.background = `rgb(${r},${g},${b})`;
+
+    let current = sectionIds[0];
+    for (const id of sectionIds){
+      const el = document.getElementById(id);
+      if (window.scrollY + 140 >= el.offsetTop) current = id;
+    }
+    navLinkEls.forEach(a=>{
+      a.classList.toggle("active", a.getAttribute("href") === "#" + current);
+    });
+
+    backToTop.classList.toggle("show", window.scrollY > 400);
+  }
+
+  let ticking = false;
+  window.addEventListener("scroll", ()=>{
+    if (!ticking){
+      requestAnimationFrame(()=>{ onScroll(); ticking = false; });
+      ticking = true;
     }
   });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      lightbox.classList.add("hidden");
-    }
-  });
+  window.addEventListener("resize", ()=>{ computeStops(); onScroll(); });
+  window.addEventListener("load", ()=>{ computeStops(); onScroll(); });
+  computeStops();
+  onScroll();
 </script>
 
 </body>
